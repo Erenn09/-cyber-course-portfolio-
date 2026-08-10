@@ -14,7 +14,7 @@ Set up a GitHub repository as my portfolio for the course.
 4. Chose visibility: <public> because i wanted you to be able to access this easily 
 5. Created folder structure with placeholder files
 6. Updated the README to describe the portfolio
-7. Created the entry template in cheatsheets/
+7. Created the entry template in cheatsheets/entry-template.md
 8. Wrote this first entry
 
 ## Findings
