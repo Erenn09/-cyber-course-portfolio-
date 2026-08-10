@@ -9,9 +9,9 @@ Set up a GitHub repository as my portfolio for the course.
 
 ## Steps
 1. Created a GitHub account at github.com/Erenn09 
-2. Enabled two-factor authentication using <Google Authenticator>
+2. Enabled two-factor authentication using Google Authenticator
 3. Created repository: github.com/<Erenn09>/cyber-course-portfolio
-4. Chose visibility: <public> because <there is no reason>
+4. Chose visibility: <public> because i wanted you to be able to access this easily 
 5. Created folder structure with placeholder files
 6. Updated the README to describe the portfolio
 7. Created the entry template in cheatsheets/
