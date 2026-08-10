@@ -1,6 +1,6 @@
 # Portfolio Setup
 
-**Date:** [today]
+**Date:** [10.4.2026]
 **Source:** Assignment U1-01a — GitHub Repository Setup — Course Portfolio
 **Environment:** GitHub web interface
 
@@ -8,10 +8,10 @@
 Set up a GitHub repository as my portfolio for the course.
 
 ## Steps
-1. Created a GitHub account at github.com/<my-username>
-2. Enabled two-factor authentication using <app name>
-3. Created repository: github.com/<my-username>/cyber-course-portfolio
-4. Chose visibility: <public / private> because <reason>
+1. Created a GitHub account at github.com/<Erenn09>
+2. Enabled two-factor authentication using <Google Authenticator>
+3. Created repository: github.com/<Erenn09>/cyber-course-portfolio
+4. Chose visibility: <public> because <no reason>
 5. Created folder structure with placeholder files
 6. Updated the README to describe the portfolio
 7. Created the entry template in cheatsheets/
@@ -23,7 +23,7 @@ Set up a GitHub repository as my portfolio for the course.
 - Every change is recorded as a "commit" with a timestamp and message — useful both for me (to find old work) and for the instructor (to confirm I worked over time)
 
 ## Issues and how I resolved them
-[Anything that didn't work the first time, and how you fixed it. If nothing went wrong, write "No issues this time."]
+[No issues this time]
 
 ## References
 - <https://docs.github.com/en/get-started/quickstart/hello-world>
