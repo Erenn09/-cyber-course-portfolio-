@@ -1,20 +1,20 @@
-# [Assignment name]
+# The entry template
 
-**Date:** YYYY-MM-DD
-**Source:** (Assignment ID, e.g. U1-05b — Linux CLI Basics)
-**Environment:** (host OS, VM, target IP, etc.)
+**Date:** 2026.8.10
+**Source:** U1-01a GitHub Repository Setup - Course Portfolio
+**Environment:** Windows 11
 
 ## Goal
-What I was trying to do.
+Creating an  entry template
 
 ## Steps
 Commands run, in order. Use code blocks.
 
 ## Findings
-What I learned / what the output told me.
+I learned how to create a file.
 
 ## Issues and how I resolved them
-Problems encountered, fixes applied.
+no problem
 
 ## References
-Links to docs, write-ups, or related notes.
+The documents on Moodle
