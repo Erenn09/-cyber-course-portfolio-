@@ -1,6 +1,9 @@
 # Network Profile — [Eren]
 #Q1:
 10.199.x.x - a8.96.e1.y7.9k.xx
+#Q2:
+A private IP address identifies devices within your local network, while a public IP address identifies your network on the internet, so your router uses private addresses to manage devices internally and share one public IP for internet access.
+
 ## Identity
 - IPv4 address: 10.199.x.x
 - Subnet mask / CIDR: 255.255.255.0
