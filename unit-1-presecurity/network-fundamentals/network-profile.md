@@ -1,17 +1,5 @@
 # Network Profile — [Eren]
-#Q1:
-10.199.x.x - a8.96.e1.y7.9k.xx
 
-#Q2:
-A private IP address identifies devices within your local network, while a public IP address identifies your network on the internet, so your router uses private addresses to manage devices internally and share one public IP for internet access.
-
-#Q3: An IP address can change and works at OSI Layer 3 (network), while a MAC address is usually fixed to the network hardware and works at OSI Layer 2 (data link).
-
-#Q4:
-Total: 256
-Usable: 254
-Network: 192.168.1.0
-Broadcast: 192.168.1.255
 
 ## Identity
 - IPv4 address: 10.199.x.x
