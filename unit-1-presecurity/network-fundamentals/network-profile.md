@@ -1,7 +1,6 @@
 # Network Profile — [Eren]
-#Q1
-:10.199.x.x 
--a8.96.e1.y7.9k.xx
+#Q1:
+10.199.x.x - a8.96.e1.y7.9k.xx
 ## Identity
 - IPv4 address: 10.199.x.x
 - Subnet mask / CIDR: 255.255.255.0
