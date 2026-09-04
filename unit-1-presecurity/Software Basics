@@ -1,1 +1,27 @@
+public class App {
+    public static void main(String[] args) throws Exception {
 
+        String tekijä = "Eren";
+        int luku3 = 9;
+        int luku4 = 10;
+        int tule = 1;
+
+        System.out.println("Hei olen Tulostin-ohjelma");
+        System.out.println("Ohjelman tekijä: " + tekijä);
+        tule = luku3 * luku4;
+        System.out.println(luku3 + "*" + luku4 + "=" + tule);
+
+        int summa = luku3 + luku4 ;
+        System.out.println(luku3 + "+" + luku4 + "=" + summa);
+        int erotus = luku3 - luku4; 
+        System.out.println(luku3 + "-" + luku4 + "=" + erotus);
+        int jako = luku3 / luku4; 
+        System.out.println(luku3 + "/" + luku4 + "=" + jako);
+
+    }
+}
+
+// Harjoitellaan vielä
+// Jako x / x =
+// Summa x + x =
+// Erotus x - x =
