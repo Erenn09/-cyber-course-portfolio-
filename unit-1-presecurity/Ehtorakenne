@@ -1,0 +1,75 @@
+public class App {
+    public static void main(String[] args) throws Exception {
+        int luku3 = 6;
+        int luku4 = 5;
+
+        if (luku3 == luku4) {
+            System.out.println("Numbers are equal");
+        } else {
+            System.out.println("Numbers are not equal");
+        }
+
+        if (luku3 > luku4) {
+            System.out.println("It is bigger");
+        } else if (luku3 < luku4) {
+            System.out.println("It is smaller");
+        } else {
+            System.out.println("Number are the same");
+        }
+
+        if (luku3 >= luku4) {
+            System.out.println("Its bigger or same");
+        }
+        if (luku3 != luku4) {
+            System.out.println("Not equal");
+        }
+        
+        // tehtävä2 
+        int luku5=8;
+    
+        //1
+        if (luku3 == luku4 || luku4 == luku5){
+            System.out.println("luvut 3 ja 4 ja 5 ovat yhtäsuuria");
+        }
+        //2
+        if (luku3 > luku4 && luku3 == luku5 ){
+            System.out.println("luku3 suurempi kuin luku4 ja luku3 yhtä suuri kuin luku5");
+        }
+        //3 
+        if (luku3 > luku4){
+            System.out.println("luku3 suurempi kuin luku4");
+        } else if (luku3 > luku5){
+            System.out.println("luku4 suurempi kuin luku5");
+        }
+        //4
+        if (luku3 == luku4){
+            System.out.println("3 and 4 are same");
+        } else if (luku3 == luku5){
+            System.out.println("x: 3 and 5 are same ");
+        }
+        //Tehtävä 3
+        String nimi1 = "Rasmus";
+        String nimi2 = "Rasmus";
+        String nimi3 = "Petrik";
+
+        // 1 - Tutki, onko nimi1 ja nimi2 samoja
+        if(nimi1.equals(nimi2)){
+           System.out.println("Nimet ovat samoja");
+       }
+
+        // 2 - Tutki, onko nimi1 ja nimi2 erisuurtia
+        if(!nimi1.equals(nimi2)){
+           System.out.println("Nimet ovat eri");
+      }
+
+        // 3 - Tutki, onko nimi1 ja nimi2 samoja. Jos ei ole, sitten
+        //     ... nimi3 ja nimi1 samoja.
+        if(nimi1.equals(nimi2)){
+           System.out.println("1 and 2");
+        } else if(nimi1.equals(nimi3)){
+          System.out.println("1 and 3");
+        }
+    }
+}
+
+
