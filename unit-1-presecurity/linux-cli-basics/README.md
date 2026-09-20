@@ -2,7 +2,7 @@
 
 ## Goal
 
-The goal of this assignment was to become comfortable with essential Linux command-line tools. I practiced navigation, file manipulation, viewing files, searching, redirection, pipes, permissions, processes, networking and package management on Debian 13.
+The goal of this assignment was to get more comfortable with the Linux command line. 
 
 ## Source
 
@@ -10,905 +10,962 @@ Linux CLI Basics – Unit 1 Presecurity
 
 ## Environment
 
-* OS: Debian GNU/Linux 13 (trixie)
+* Debian GNU/Linux 13 (trixie)
 * Debian version: 13.6
 * Architecture: x86_64
-* Virtual machine: Debian 13 VM
+* Debian 13 virtual machine
 
----
+
 
 # Part 1 Getting your bearings
 
-## Q1 — What username are you logged in as?
+## Q1: What username are you logged in as?
 
 Command:
 
-```bash
 $ whoami
-```
 
 Output:
 
-```text
+
 varia
-```
 
-**Answer:** I am logged in as `varia`.
 
-## Q2 — Are you a member of the `sudo` group? How can you tell from the output of `id`?
+Answer: I am logged in as varia.
+
+## Q2: Are you a member of the sudo group? How can you tell from the output of id?
 
 Command:
 
-```bash
 $ id
-```
 
-**Answer:** The account has sudo access, which I could confirm because commands such as `sudo apt update` and `sudo apt upgrade` worked successfully. The exact `id` output was not saved, so I am not adding a made-up group list.
 
-## Q3 — What kernel version is your system running?
+Answer: Yes. The sudo group is shown in the groups part of the id output.
+
+## Q3: What kernel version is your system running?
 
 Command:
 
-```bash
 $ uname -a
-```
 
-**Answer:** The system is running the Linux kernel `6.12.107+deb13-amd64`.
 
-## Q4 — What is the difference in the depth of information they give you?
+Output:
+
+
+Linux debian-lab 6.12.107+deb13-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.12.107-1 (2026-08-29) x86_64 GNU/Linux
+
+
+Answer: 6.12.107+deb13-amd64.
+
+## Q4: What is the difference in the depth of information they give you?
 
 Commands:
 
-```bash
+
 $ whatis whoami
+
 $ man whoami
-```
 
-**Answer:** `whatis` gives a short description of the command. `man` gives much more detailed information, including the command description, syntax and available options.
 
-## Q5 — While in `man`, how do you (a) search for the word "user" and (b) quit?
+Answer: whatis gives a short description of the command. man gives more detailed information, including the command description, syntax and options.
 
-**Answer:**
+## Q5: While in man, how do you (a) search for the word "user" and (b) quit?
 
-To search for `user`, I used:
+Answer: I searched for the word user by typing /user.
 
-```text
-/user
-```
 
-Then I pressed:
 
-```text
-q
-```
-
-to quit the manual.
-
----
 
 # Part 2 Navigation
 
-## Q6 — What did `cd -` do?
+## Q6: What did cd - do?
 
 Commands:
 
-```bash
-$ cd /etc
-$ cd ..
-$ cd /var/log
-$ cd -
-$ cd ~
-$ cd /
-```
 
-**Answer:** `cd -` changed back to the previous working directory.
+$ cd /etc 
 
-## Q7 — What additional information does `-l` give you over plain `ls`?
+
+$ cd .. 
+
+
+$ cd /var/log 
+
+
+$ cd - 
+
+
+$ cd ~ 
+
+
+$ cd / 
+
+
+
+
+Answer: cd - took me back to the previous directory.
+
+## Q7: What additional information does -l give you over plain ls?
 
 Command:
 
-```bash
 $ ls -l /etc
-```
 
-**Answer:** `-l` shows the long listing format. It includes permissions, link count, owner, group, file size, modification date and filename.
 
-## Q8 — What does `-a` show that wasn't visible before? Name two examples from the output.
+Answer: It shows permissions, owner, group, size, modification date and the name.
+
+## Q8: What does -a show that wasn't visible before? Name two examples from the output.
 
 Command:
 
-```bash
 $ ls -la /etc
-```
 
-**Answer:** `-a` also shows hidden files and directories. Two examples are:
 
-```text
-.
-..
-```
+Answer: -a also shows hidden files and directories. 
 
-## Q9 — What is the largest file in `/var/log`? What size is it?
+## Q9: What is the largest file in /var/log? What size is it?
 
 Command:
 
-```bash
+
 $ ls -lh /var/log
-```
 
 Output:
 
-```text
--rw-r--r-- 1 root root 806K Sep  1 10:28 dpkg.log
-```
+-rw-r--r--  1 root              root            806K Sep  1 10:28 dpkg.log
 
-**Answer:** The largest file was `dpkg.log`, with a size of **806K**.
 
-## Q10 — What was modified most recently?
+Answer: The largest file was dpkg.log and it was 806K.
+
+## Q10: What was modified most recently?
 
 Command:
 
-```bash
+
 $ ls -lt /var/log
-```
 
-Output excerpt:
 
-```text
--rw-r--r-- 1 root root 8192 Sep 13 14:41 wtmp.db
--rw-rw---- 1 root utmp 9984 Sep 13 14:41 wtmp
-```
+Output:
 
-**Answer:** `wtmp.db` and `wtmp` were the most recently modified entries, both at Sep 13 14:41.
 
----
+-rw-r--r--  1 root                                  root                                     8192 Sep 13 14:41 wtmp.db
+
+-rw-rw----  1 root                                  utmp                                     9984 Sep 13 14:41 wtmp
+
+
+Answer: wtmp.db and wtmp were modified most recently.
+
+
 
 # Part 3 Creating and managing files
 
-## Q11 — Show the command (or commands) you used.
+## Q11: Show the command (or commands) you used.
 
 Command:
 
-```bash
+
 $ mkdir -p ~/cyber-course/{unit1,unit2,unit3/{osint,recon,crypto},scratch}
-```
 
-I created the required directory structure with `mkdir -p`.
 
-I then created the files:
+Then I created the files:
 
-```bash
+
 $ touch ~/cyber-course/scratch/a.txt
+
 $ touch ~/cyber-course/scratch/b.txt
+
 $ touch ~/cyber-course/scratch/c.txt
-```
 
-I copied and moved them with:
 
-```bash
+I copied and moved them:
+
+
 $ cp ~/cyber-course/scratch/a.txt ~/cyber-course/unit1/intro.txt
-$ mv ~/cyber-course/scratch/b.txt ~/cyber-course/unit2/
-$ mv ~/cyber-course/scratch/c.txt ~/cyber-course/scratch/notes.txt
-```
 
-## Q12 — What key combination did you use to save? What key combination did you use to exit?
+$ mv ~/cyber-course/scratch/b.txt ~/cyber-course/unit2/
+
+$ mv ~/cyber-course/scratch/c.txt ~/cyber-course/scratch/notes.txt
+
+
+
+## Q12: What key combination did you use to save? What key combination did you use to exit?
 
 Command:
 
-```bash
+
 $ nano ~/cyber-course/unit1/intro.txt
-```
+
 
 I entered:
 
-```text
+
 This is my first file edited from the Linux command line.
-Today I learned that mv is also rename, and that nano shows shortcuts at the bottom.
-```
 
-**Answer:** I used `Ctrl+O` to save, pressed `Enter` to confirm the filename, and used `Ctrl+X` to exit.
+Today I learned that mv is also rename, and that nano shows shortcuts at the bottom
 
-I checked the contents with:
 
-```bash
+Answer: I used Ctrl+O to save and Ctrl+X to exit. I also pressed Enter after Ctrl+O to confirm the filename.
+
+I checked the file with:
+
+
 $ cat ~/cyber-course/unit1/intro.txt
-```
+
 
 Output:
 
-```text
-This is my first file edited from the Linux command line.
-Today I learned that mv is also rename, and that nano shows shortcuts at the bottom.
-```
 
-## Q13 — Why did `rmdir` fail (or succeed)?
+This is my first file edited from the Linux command line.
+
+Today I learned that mv is also rename, and that nano shows shortcuts at the bottom
+
+
+## Q13: Why did rmdir fail (or succeed)?
 
 Command:
 
-```bash
+
 $ rmdir ~/cyber-course/scratch/
-```
+
 
 Output:
 
-```text
+
 rmdir: failed to remove '/home/varia/cyber-course/scratch/': Directory not empty
-```
 
-**Answer:** `rmdir` failed because `scratch` still contained files. `rmdir` only removes empty directories.
 
-I then removed it properly with:
+Answer: rmdir failed because the directory was not empty. There were still files inside it.
 
-```bash
+I then removed it with:
+
+
 $ rm -r ~/cyber-course/scratch/
-```
 
----
+
+
 
 # Part 4 Viewing files
 
-## Q14 — Which Debian version do you have?
+## Q14: Which Debian version do you have?
 
 Command:
 
-```bash
+
 $ cat /etc/os-release
-```
+
 
 Output:
 
-```text
 PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+
+NAME="Debian GNU/Linux"
+
 VERSION_ID="13"
+
 VERSION="13 (trixie)"
+
 VERSION_CODENAME=trixie
+
 DEBIAN_VERSION_FULL=13.6
-```
 
-**Answer:** I have **Debian GNU/Linux 13 (trixie), version 13.6**.
+ID=debian
 
-## Q15 — What kind of messages do you see? Are they recent?
+HOME_URL="https://www.debian.org/"
+
+SUPPORT_URL="https://www.debian.org/support"
+
+BUG_REPORT_URL="https://bugs.debian.org/"
+
+
+
+Answer: I have Debian GNU/Linux 13 (trixie), version 13.6.
+
+## Q15: What kind of messages do you see? Are they recent?
 
 The assignment command was:
 
-```bash
+
 $ sudo tail -n 10 /var/log/syslog
-```
 
-My Debian VM did not have `/var/log/syslog`, so it returned:
 
-```text
-tail: cannot open '/var/log/syslog' for reading: No such file or directory
-```
 
-I used the system journal instead:
 
-```bash
-$ sudo journalctl -n 10
-```
+Answer: They were system and service messages. The timestamps showed that they were recent.
 
-The output contained messages from services such as `vboxadd-service`, `gdm-password`, `gnome-shell`, `NetworkManager` and `sudo`.
 
-**Answer:** These were recent system and service messages. The timestamps showed that they were recent.
-
----
 
 # Part 5 Searching
 
-## Q16 — How many lines were returned?
+## Q16: How many lines were returned? (Hint: pipe to wc -l.)
 
 Command:
 
-```bash
+
 $ grep "ssh" /etc/services
-```
+
 
 Output:
 
-```text
-ssh        22/tcp        # SSH Remote Login Protocol
-```
 
-I counted the results with:
+ssh		22/tcp				# SSH Remote Login Protocol
 
-```bash
+
+Then:
+
+
 $ grep "ssh" /etc/services | wc -l
-```
+
 
 Output:
 
-```text
+
 1
-```
 
-**Answer:** **1 line** was returned.
 
-## Q17 — How would you modify the command to show only `.conf` files modified in the last 7 days?
+Answer: 1 line was returned.
+
+## Q17: How would you modify the command to show only .conf files modified in the last 7 days?
 
 Command:
 
-```bash
 $ find /etc -name "*.conf" -mtime -7
-```
 
-Output included:
 
-```text
+Output:
+
+find: ‘/etc/ssl/private’: Permission denied
+
+find: ‘/etc/credstore.encrypted’: Permission denied
+
+find: ‘/etc/polkit-1/rules.d’: Permission denied
+
+find: ‘/etc/credstore’: Permission denied
+
 /etc/resolv.conf
+
+find: ‘/etc/cups/ssl’: Permission denied
+
 /etc/cups/subscriptions.conf
-```
 
-There were also some `Permission denied` messages for protected directories.
 
-**Answer:** I added `-mtime -7` to the original command. This finds `.conf` files modified less than 7 days ago.
 
-## Q18 — Where are these commands actually located on the filesystem?
+Answer: I added -mtime -7 to the command. This shows .conf files modified less than 7 days ago.
+
+## Q18: Where are these commands actually located on the filesystem?
 
 Commands:
 
-```bash
+
 $ which ls
+
 $ which nano
-```
+
 
 Output:
 
-```text
+
 /usr/bin/ls
+
 /usr/bin/nano
-```
 
-**Answer:**
 
-```text
-ls   -> /usr/bin/ls
-nano -> /usr/bin/nano
-```
+Answer: ls is located at /usr/bin/ls and nano is located at /usr/bin/nano.
 
----
+
 
 # Part 6 History, redirection, and pipes
 
-## Q19 — What does the `|` symbol do here?
+## Q19: What does the | symbol do here?
 
 Command:
 
-```bash
+
 $ history | tail -n 20
-```
 
-**Answer:** The pipe sends the output from `history` to `tail`. In this case, `tail` displays the last 20 lines of the command history.
 
-## Q20 — What is the difference between `>` and `>>`?
+Output:
+
+
+59  mv ~/cyber-course/scratch/c.txt ~/cyber-course/scratch/notes.txt
+
+60  touch
+
+61  ls -l
+
+62  ls -l ~/cyber-course/scratch/
+
+63  ls -l ~/cyber-course/unit1/
+
+64  ls -l ~/cyber-course/unit2/
+
+65  nano ~/cyber-course/unit1/intro.txt
+
+66  cat ~/cyber-course/unit1/intro.txt
+
+67  rmdir ~/cyber-course/scratch/
+
+68  rm -r ~/cyber-course/scratch/
+
+69  ls ~/cyber-course/
+
+70  cat /etc/os-release
+
+71  sudo tail -n 10 /var/log/syslog
+
+72  sudo journalctl -n 10
+
+73  grep "ssh" /etc/services
+
+74  grep "ssh" /etc/services | wc -l
+
+75  find /etc -name "*.conf" -mtime -7
+
+76  which ls
+
+77  which nano
+
+78  history | tail -n 20
+
+
+
+Answer: The | sends the output of one command to another command. Here, history sends its output to tail.
+
+## Q20: What is the difference between > and >>?
 
 Commands:
 
-```bash
+
 $ ls -la ~/cyber-course/ > ~/listing.txt
+
 $ cat ~/listing.txt
+
 $ date >> ~/listing.txt
+
 $ cat ~/listing.txt
-```
+
 
 Output:
 
-```text
+
 total 20
+
 drwxrwxr-x  5 varia varia 4096 Sep 13 15:12 .
+
 drwx------ 16 varia varia 4096 Sep 13 17:11 ..
+
 drwxrwxr-x  2 varia varia 4096 Sep 13 15:07 unit1
+
 drwxrwxr-x  2 varia varia 4096 Sep 13 15:04 unit2
+
 drwxrwxr-x  5 varia varia 4096 Sep 13 14:59 unit3
+
 Sun 13 Sep 17:11:39 EEST 2026
-```
 
-**Answer:** `>` writes to a file and overwrites the existing contents. `>>` adds the new output to the end of the file.
 
-## Q21 — What was the output, and why?
+Answer: > writes to a file and overwrites the old contents. >> adds new output to the end of the file.
+
+## Q21: What was the output, and why?
 
 Command:
 
-```bash
+
 $ echo "hello cyber world" | grep "cyber"
-```
 
-**Answer:** The output was:
 
-```text
+Output:
+
+
 hello cyber world
-```
 
-This happened because the sentence contains the word `cyber`, so `grep` printed the matching line.
 
-I also searched my history with:
+Answer: grep found the word cyber in the sentence, so it printed the line.
 
-```bash
-$ history | grep "cd "
-```
 
-This returned my previous `cd` commands.
-
-I tested both:
-
-```bash
-$ clear
-```
-
-and:
-
-```text
-Ctrl+L
-```
-
-Both clear the visible terminal screen.
-
----
 
 # Part 7 Archives
 
-## Q22 — Confirm with `ls -la` that the extraction worked. What did you find inside?
+## Q22: Confirm with ls -la that the extraction worked. What did you find inside?
 
-I created the ZIP archive with:
+My first attempt was:
 
-```bash
-$ zip -r ~/unit1.zip ~/cyber-course/unit1/
-```
+$ cd ~/cyber-course/
 
-I listed it with:
+$ zip -r unit1.zip unit1/
 
-```bash
+
+Output:
+
+
+  adding: home/varia/cyber-course/unit1/ (stored 0%)
+  
+  adding: home/varia/cyber-course/unit1/intro.txt (deflated 23%)
+
+
+I checked the archive:
+
+
 $ unzip -l ~/unit1.zip
-```
 
-The archive contained:
 
-```text
-home/varia/cyber-course/unit1/
-home/varia/cyber-course/unit1/intro.txt
-```
+Output:
 
-I extracted it with:
 
-```bash
+ Archive:  /home/varia/unit1.zip
+
+  Length                 Date                     Time                                 Name
+
+        0                 2026-09-13              15:07                              home/varia/cyber-course/unit1/
+        
+      143                 2026-09-13              15:07                              home/varia/cyber-course/unit1/intro.txt
+                  
+      143                    2 files
+
+
+Then I extracted it:
+
+
 $ unzip ~/unit1.zip -d ~/unit1-extracted
-```
 
-The extracted directory contained:
 
-```text
-intro.txt
-```
+The extracted location contained intro.txt inside the unit1 directory.
 
-**Answer:** The extraction worked and I found `intro.txt` inside the `unit1` directory.
+Answer: The extraction worked and I found intro.txt inside the unit1 directory.
 
-## Q23 — What do the flags `c`, `z`, `v`, and `f` each mean?
+## Q23: What do the flags c, z, v, and f each mean?
 
 Command:
 
-```bash
-$ tar -czvf ~/unit2.tar.gz ~/cyber-course/unit2/
-```
+$ ~/cyber-course/unit2/
+$ tar -czvf unit2.tar.gz unit2/
 
-**Answer:**
 
-* `c` = create
-* `z` = gzip compression
-* `v` = verbose output
-* `f` = specify the archive file
+Output:
+
+
+tar: Removing leading `/' from member names
+
+/home/varia/cyber-course/unit2/
+
+/home/varia/cyber-course/unit2/b.txt
+
 
 I checked the archive with:
 
-```bash
-$ tar -tzvf ~/unit2.tar.gz
-```
 
----
+$ tar -tzvf unit2.tar.gz
+
+
+Output:
+
+
+drwxrwxr-x varia/varia       0 2026-09-13 15:04 home/varia/cyber-course/unit2/
+
+-rw-rw-r-- varia/varia       0 2026-09-13 15:03 home/varia/cyber-course/unit2/b.txt
+
+
+Answer:
+
+c means create.
+
+z means gzip compression.
+
+v means verbose.
+
+f means file.
+
+
 
 # Part 8 Permissions
 
-## Q24 — Paste the permission string. Can the owner execute the file?
+## Q24: Paste the permission string. Can the owner execute the file?
 
-Command:
+Commands:
 
-```bash
+
 $ touch ~/cyber-course/hello.sh
+
 $ ls -l ~/cyber-course/hello.sh
-```
+
 
 Output:
 
-```text
+
 -rw-rw-r-- 1 varia varia 0 Sep 13 17:21 /home/varia/cyber-course/hello.sh
-```
 
-**Answer:** The permission string is:
 
-```text
--rw-rw-r--
-```
+Answer: The permission string is -rw-rw-r--. No, the owner cannot execute the file because there is no x permission.
 
-No, the owner cannot execute the file because there is no `x` permission.
+## Q25: What happened, and why?
 
-## Q25 — What happened, and why?
+I added the script and tried to run it:
 
-I added the script:
 
-```text
-#!/bin/bash
-echo "Hello from my first script"
-```
-
-Then I tried:
-
-```bash
 $ ~/cyber-course/hello.sh
-```
+
 
 Output:
 
-```text
+
 bash: /home/varia/cyber-course/hello.sh: Permission denied
-```
 
-**Answer:** The script could not run because it did not have execute permission.
 
-## Q26 — What does the new permission string look like? Did the script run this time?
+Answer: The script did not run because it did not have execute permission.
 
-Command:
+## Q26: What does the new permission string look like? Did the script run this time?
 
-```bash
+Commands:
+
+
 $ chmod u+x ~/cyber-course/hello.sh
+
 $ ls -l ~/cyber-course/hello.sh
-```
+
 
 Output:
 
-```text
+
 -rwxrw-r-- 1 varia varia 47 Sep 13 17:22 /home/varia/cyber-course/hello.sh
-```
 
-I ran the script again:
 
-```bash
+Then I ran it again:
+
+
 $ ~/cyber-course/hello.sh
-```
+
 
 Output:
 
-```text
+
 Hello from my Linux script!
-```
 
-**Answer:** The new permission string was `-rwxrw-r--`. Yes, the script ran successfully after execute permission was added.
 
-## Q27 — What does `700` mean in plain language?
+Answer: The new permission string was -rwxrw-r--. Yes, the script ran this time.
+
+## Q27: What does 700 mean in plain language?
 
 Command:
 
-```bash
 $ chmod 700 ~/cyber-course/hello.sh
+
 $ ls -l ~/cyber-course/hello.sh
-```
+
 
 Output:
 
-```text
+
 -rwx------ 1 varia varia 47 Sep 13 17:22 /home/varia/cyber-course/hello.sh
-```
 
-**Answer:** `700` means the owner has read, write and execute permissions. The group and everyone else have no permissions.
 
----
+Answer: 700 means the owner can read, write and execute the file
+
+
 
 # Part 9 Processes and system info
 
-## Q28 — What does the `USER` column show?
+## Q28: What does the USER column show?
 
 Command:
 
-```bash
-$ ps aux | head -n 10
-```
 
-Output excerpt:
+$ ps aux | head
+
+
+Output:
 
 ```text
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root           1  0.0  0.7  23876 15060 ?        Ss   14:40   0:06 /sbin/init
 root           2  0.0  0.0      0     0 ?        S    14:40   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   14:40   0:00 [pool_workqueue_release]
+root           4  0.0  0.0      0     0 ?        I<   14:40   0:00 [kworker/R-kvfree_rcu_reclaim]
+root           5  0.0  0.0      0     0 ?        I<   14:40   0:00 [kworker/R-rcu_gp]
+root           6  0.0  0.0      0     0 ?        I<   14:40   0:00 [kworker/R-sync_wq]
+root           7  0.0  0.0      0     0 ?        I<   14:40   0:00 [kworker/R-slub_flushwq]
+root           8  0.0  0.0      0     0 ?        S    14:40   0:00 [kworker/R-netns]
+root          11  0.0  0.0      0 ?        I<   14:40   0:00 [kworker/0:0H-events_highpri]
 ```
 
-**Answer:** The `USER` column shows which user owns or runs the process.
+Answer: The USER column shows which user owns the process.
 
-## Q29 — How much disk space is your `cyber-course` directory using?
+## Q29: How much disk space is your cyber-course directory using?
 
 Commands:
 
-```bash
+
 $ df -h
-$ du -sh ~/cyber-course/
-```
+
+$ du -sh ~/cyber-course
 
 Output:
 
-```text
+
 /dev/sda1        30G  5.8G   23G  21% /
-```
+
 
 and:
 
-```text
-36K    /home/varia/cyber-course
-```
 
-**Answer:** My `cyber-course` directory was using **36K** of disk space.
+36K	/home/varia/cyber-course
 
-## Q30 — How much RAM does your VM have, and how much is currently used?
+
+Answer: The cyber-course directory was using 36K.
+
+## Q30: How much RAM does your VM have, and how much is currently used?
 
 Command:
 
-```bash
+
 $ free -h
-```
+
 
 Output:
 
-```text
-               total        used        free      shared  buff/cache   available
+
+                          
+  total        /             used    /      free      /  shared      /  buff-cache        /    available
+ 
 Mem:           1.9Gi       1.0Gi       214Mi       9.6Mi       872Mi       921Mi
+
 Swap:          1.7Gi          0B       1.7Gi
-```
 
-**Answer:** The VM has **1.9 GiB of RAM**, with about **1.0 GiB currently used**. Swap is 1.7 GiB and none is currently used.
 
----
+Answer: The VM has 1.9GiB of RAM and about 1.0GiB is currently used.
+
+
 
 # Part 10 Networking and downloads
 
-## Q31 — What is your VM's IP address on the primary interface?
+## Q31: What is your VM's IP address on the primary interface?
 
 Command:
 
-```bash
+
 $ ip a
-```
 
-The primary interface was:
 
-```text
-enp0s3
-```
 
-**Answer:** The VM had a private IPv4 address in the `10.0.2.0/24` network. I am not publishing the exact IP address in this public GitHub README.
+Answer: The IPv4 address was 10.0.2.15/24.
 
-## Q32 — Did both succeed? If one failed, what is the most likely reason?
+## Q32: Did both succeed? If one failed, what is the most likely reason?
 
 Commands:
 
-```bash
+
 $ ping -c 4 1.1.1.1
+
 $ ping -c 4 example.com
-```
 
-Both succeeded.
 
-For `1.1.1.1`:
+Output for 1.1.1.1:
 
-```text
-4 packets transmitted, 4 received, 0% packet loss
+
+4 packets transmitted, 4 received, 0% packet loss, time 3008ms
+
 rtt min/avg/max/mdev = 20.173/27.050/40.847/8.217 ms
-```
 
-For `example.com`:
+Output for example.com:
 
-```text
-4 packets transmitted, 4 received, 0% packet loss
+
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+
 rtt min/avg/max/mdev = 26.183/28.718/33.601/2.876 ms
-```
 
-**Answer:** Yes, both tests succeeded. Both had 0% packet loss.
 
-## Q33 — Are the two files identical?
+Answer: Both succeeded. Both received 4 packets and had 0% packet loss.
 
-I downloaded the Debian page with `wget` and then with `curl`.
 
-The curl command was:
+## Q33: Are the two files identical? (Hint: diff debian.html debian2.html.
 
-```bash
+Commands: 
+
 $ curl https://www.debian.org/ > debian-curl.html
-```
 
-Then I compared the files:
 
-```bash
+Output:
+
+
+100 15862  100 15862    0     0  39651      0 --:--:-- --:--:-- --:--:-- 39854
+
+
+Then:
+
+
 $ diff index.html debian-curl.html
-```
+
 
 There was no output.
 
-**Answer:** Yes, the files were identical because `diff` showed no differences.
 
----
+Answer: Yes. There were no differences between the two files.
+
+
 
 # Part 11 Package management and sudo
 
-## Q34 — Did `sudo` ask for a password? Whose password?
+## Q34: Did sudo ask for a password? Whose password?
 
 Command:
 
-```bash
+
 $ sudo apt update
-```
 
-The terminal asked:
 
-```text
+Output:
+
 [sudo] password for varia:
-```
 
-**Answer:** Yes. It asked for the password of the current user, `varia`.
-
-The package catalog was successfully updated and the system reported:
-
-```text
 88 packages can be upgraded.
-```
 
-## Q35 — Were any packages upgraded? Roughly how many?
+
+Answer: Yes. It asked for the password of the current user, varia.
+
+## Q35: Were any packages upgraded? Roughly how many?
 
 Commands:
 
-```bash
+
 $ apt list --upgradable
+
 $ sudo apt upgrade
-```
 
-The upgrade summary was:
-
-```text
-Upgrading: 88
-Installing: 0
-Removing: 0
-Not Upgrading: 0
-```
-
-**Answer:** Yes. **88 packages** were upgraded.
-
-## Q36 — What's one thing `htop` shows you that `top` did not?
-
-I installed `htop` with:
-
-```bash
-$ sudo apt install htop
-```
-
-Then checked it:
-
-```bash
-$ which htop
-```
 
 Output:
 
-```text
+
+Upgrading: 88, Installing: 0, Removing: 0, Not Upgrading: 0
+
+
+Answer: Yes. 88 packages were upgraded.
+
+## Q36: What's one thing htop shows you that top did not?
+
+Commands:
+
+
+$ sudo apt install htop
+
+$ which htop
+
+
+Output:
+
+
 /usr/bin/htop
-```
 
-I also ran:
 
-```bash
-$ htop
-```
+I also checked the package:
 
-and exited with `q`.
 
-I checked the package information:
-
-```bash
 $ apt show htop
-```
 
-Relevant output:
+output:
 
-```text
+
 Package: htop
+
 Version: 3.4.1-5
+
 Description: interactive processes viewer
-```
 
-**Answer:** `htop` gives a more interactive and easier-to-navigate view of processes. It allows scrolling through the process list and shows full command lines more conveniently than `top`.
 
-## Q37 — What is `nmap`, according to the description?
+I ran htop and quit with q.
+
+Answer: I could scroll through the process list and see full command lines more easily.
+
+## Q37: What is nmap, according to the description?
 
 Command:
 
-```bash
+
 $ apt search nmap
-```
+
 
 Output:
 
-```text
-nmap/stable 7.95-3 amd64
+
+nmap/stable 7.95+dfsg-3 amd64
+
   The Network Mapper
-```
 
-**Answer:** According to the package description, `nmap` is **The Network Mapper**. It is a network scanning tool.
 
----
+Answer: According to the description, nmap is The Network Mapper.
+
+
 
 # Part 12 Putting it together
 
-## Q38 — Paste the commands you used. The output redirection (`>` and `>>`) is the key here.
+## Q38: Paste the commands you used. The output redirection (> and >>) is the key here.
 
-I created the report directory:
+I created the directory:
 
-```bash
+
 $ mkdir -p ~/cyber-course/report
-```
 
-Then I created `system-info.txt` using output redirection:
 
-```bash
+Then I created system-info.txt:
+
+
 $ echo "Hostname:" > ~/cyber-course/report/system-info.txt
+
 $ hostname >> ~/cyber-course/report/system-info.txt
 
 $ echo "Username:" >> ~/cyber-course/report/system-info.txt
+
 $ whoami >> ~/cyber-course/report/system-info.txt
 
 $ echo "Kernel:" >> ~/cyber-course/report/system-info.txt
+
 $ uname -a >> ~/cyber-course/report/system-info.txt
 
 $ echo "Disk usage:" >> ~/cyber-course/report/system-info.txt
+
 $ df -h >> ~/cyber-course/report/system-info.txt
 
 $ echo "Date:" >> ~/cyber-course/report/system-info.txt
+
 $ date >> ~/cyber-course/report/system-info.txt
-```
 
-I checked the file with:
 
-```bash
+I checked the file:
+
+
 $ cat ~/cyber-course/report/system-info.txt
-```
 
-Then I created the ZIP archive:
 
-```bash
+Then I created the ZIP:
+
+
 $ zip -r ~/report.zip ~/cyber-course/report/
-```
+
+
+Output:
+
+
+adding: home/varia/cyber-course/report/ (stored 0%)
+
+adding: home/varia/cyber-course/report/system-info.txt (deflated 46%)
+
+
+Finally:
+
+
+$ unzip -l ~/report.zip
+
 
 Output:
 
 ```text
-adding: home/varia/cyber-course/report/
-adding: home/varia/cyber-course/report/system-info.txt
+Archive:  /home/varia/report.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+        0  2026-09-13 17:42   home/varia/cyber-course/report/
+      648  2026-09-13 17:42   home/varia/cyber-course/report/system-info.txt
+---------                     -------
+      648                     2 files
 ```
 
-Finally, I verified it:
 
-```bash
-$ unzip -l ~/report.zip
-```
-
-The archive contained:
-
-```text
-home/varia/cyber-course/report/
-home/varia/cyber-course/report/system-info.txt
-```
-
----
 
 # Reflection
 
-Thoughts
-
-To be honest, there wasn’t a command that really surprised me, maybe the ones used to create files.
-
-The command I think I’ll use most often is `ls`, because I always need it when I want to check files, directories, or permissions. 
-
-One of the topics that’s still a bit confusing in the Linux command line is permissions. At first, it was hard to read strings like `-rwx------`. That difficulty persists; it’s still very hard to read.
-
-
-
+To be honest, there wasn’t a command that really surprised me, maybe the ones used to create files. The command I think I’ll use most often is ls, because I always need it when I want to check files, directories, or permissions. One of the topics that’s still a bit confusing in the Linux command line is permissions. At first, it was hard to read strings like -rwx------. That difficulty persists; it’s still very hard to read.
